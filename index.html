@@ -1,0 +1,1125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solo Automation | Digital Solutions</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-cyan: #00ffff;
+            --primary-purple: #8b00ff;
+            --accent-pink: #ff0080;
+            --dark-bg: #0a0a0a;
+            --card-bg: #111111;
+            --text-primary: #ffffff;
+            --text-secondary: #b0b0b0;
+            --success: #00ff88;
+            --warning: #ffcc00;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            min-height: 100vh;
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(139, 0, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(0, 255, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, rgba(255, 0, 128, 0.1) 0%, transparent 50%);
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 2px,
+                rgba(0, 255, 255, 0.03) 2px,
+                rgba(0, 255, 255, 0.03) 4px
+            );
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 25px 0;
+            position: relative;
+            z-index: 10;
+        }
+
+        .logo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 900;
+            color: var(--primary-cyan);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            text-shadow: 
+                0 0 10px var(--primary-cyan),
+                0 0 20px var(--primary-cyan),
+                0 0 40px var(--primary-cyan);
+            animation: flicker 3s infinite;
+        }
+
+        @keyframes flicker {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav a {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            position: relative;
+            padding: 5px 0;
+            transition: color 0.3s;
+        }
+
+        nav a:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-cyan);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover:after {
+            width: 100%;
+        }
+
+        nav a:hover {
+            color: var(--primary-cyan);
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 100px 0 80px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3.8rem;
+            font-weight: 900;
+            color: var(--primary-cyan);
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            max-width: 800px;
+            margin: 0 auto 50px;
+            line-height: 1.6;
+        }
+
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 16px 45px;
+            background: linear-gradient(45deg, var(--primary-cyan), var(--primary-purple));
+            color: #000;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            box-shadow: 0 5px 15px rgba(0, 255, 255, 0.3);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary-cyan);
+            color: var(--primary-cyan);
+        }
+
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(0, 255, 255, 0.5);
+        }
+
+        /* Section Styles */
+        .section {
+            padding: 100px 0;
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: var(--primary-cyan);
+            text-align: center;
+            margin-bottom: 60px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            position: relative;
+        }
+
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--primary-cyan), transparent);
+        }
+
+        /* Services Section */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            background: linear-gradient(135deg, var(--card-bg) 0%, rgba(17, 17, 17, 0.8) 100%);
+            border: 1px solid rgba(0, 255, 255, 0.2);
+            border-radius: 10px;
+            padding: 40px 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--primary-cyan), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .service-card:hover:before {
+            left: 100%;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 255, 255, 0.2);
+            border-color: var(--primary-cyan);
+        }
+
+        .service-icon {
+            font-size: 3.5rem;
+            color: var(--primary-cyan);
+            margin-bottom: 25px;
+        }
+
+        .service-card h3 {
+            font-size: 1.7rem;
+            margin-bottom: 15px;
+            color: var(--primary-cyan);
+        }
+
+        .service-card p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* Projects Section */
+        .projects-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .tab-btn {
+            padding: 12px 30px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            color: var(--text-primary);
+            font-weight: 600;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .tab-btn.active, .tab-btn:hover {
+            background: linear-gradient(45deg, var(--primary-cyan), var(--primary-purple));
+            color: #000;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .project-card {
+            background: linear-gradient(135deg, var(--card-bg) 0%, rgba(17, 17, 17, 0.8) 100%);
+            border: 1px solid rgba(0, 255, 255, 0.2);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 255, 255, 0.2);
+            border-color: var(--primary-cyan);
+        }
+
+        .project-image {
+            height: 220px;
+            background: linear-gradient(45deg, var(--primary-purple), var(--accent-pink));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+        }
+
+        .project-content {
+            padding: 30px;
+        }
+
+        .project-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.7rem;
+            color: var(--primary-cyan);
+            margin-bottom: 15px;
+        }
+
+        .project-description {
+            color: var(--text-secondary);
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+
+        .project-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .project-link {
+            padding: 10px 25px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            color: var(--primary-cyan);
+            text-decoration: none;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 600;
+        }
+
+        .project-link:hover {
+            background: linear-gradient(45deg, var(--primary-cyan), var(--primary-purple));
+            color: #000;
+        }
+
+        /* Testimonials Section */
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .testimonial-card {
+            background: linear-gradient(135deg, var(--card-bg) 0%, rgba(17, 17, 17, 0.8) 100%);
+            border: 1px solid rgba(0, 255, 255, 0.2);
+            border-radius: 10px;
+            padding: 30px;
+            position: relative;
+        }
+
+        .testimonial-card:before {
+            content: '"';
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 5rem;
+            color: rgba(0, 255, 255, 0.1);
+            font-family: serif;
+            line-height: 1;
+        }
+
+        .testimonial-content {
+            color: var(--text-secondary);
+            font-style: italic;
+            margin: 20px 0 30px;
+            line-height: 1.6;
+            font-size: 1.1rem;
+        }
+
+        .client-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            border-top: 1px solid rgba(0, 255, 255, 0.1);
+            padding-top: 20px;
+        }
+
+        .client-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--primary-cyan), var(--primary-purple));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+
+        .client-details h4 {
+            font-size: 1.3rem;
+            color: var(--primary-cyan);
+            margin-bottom: 5px;
+        }
+
+        /* Booking Section */
+        .booking-section {
+            background: linear-gradient(135deg, rgba(0, 255, 255, 0.1), rgba(139, 0, 255, 0.1));
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            border-radius: 15px;
+            padding: 70px 50px;
+            text-align: center;
+            margin: 80px 0;
+        }
+
+        .booking-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .booking-options {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin: 50px 0;
+            flex-wrap: wrap;
+        }
+
+        .booking-card {
+            background: var(--card-bg);
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            border-radius: 10px;
+            padding: 40px 30px;
+            width: 280px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .booking-card:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--primary-cyan), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .booking-card:hover:before {
+            left: 100%;
+        }
+
+        .booking-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 255, 255, 0.3);
+            border-color: var(--primary-cyan);
+        }
+
+        .booking-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--primary-cyan);
+        }
+
+        .booking-price {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.8rem;
+            color: var(--primary-cyan);
+            margin: 15px 0;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+        }
+
+        .booking-features {
+            list-style: none;
+            margin: 25px 0;
+            text-align: left;
+        }
+
+        .booking-features li {
+            padding: 10px 0;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-bottom: 1px solid rgba(0, 255, 255, 0.1);
+        }
+
+        .booking-features li:before {
+            content: '✓';
+            color: var(--primary-cyan);
+            font-weight: bold;
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 70px 0 30px;
+            border-top: 1px solid rgba(0, 255, 255, 0.1);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+
+        .footer-col h3 {
+            color: var(--primary-cyan);
+            margin-bottom: 25px;
+            font-size: 1.7rem;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 18px;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.1rem;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-cyan);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 18px;
+            margin-top: 25px;
+        }
+
+        .social-link {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-cyan);
+            transition: all 0.3s ease;
+            font-size: 1.3rem;
+        }
+
+        .social-link:hover {
+            background: var(--primary-cyan);
+            color: #000;
+            transform: translateY(-5px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(0, 255, 255, 0.1);
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, var(--card-bg) 0%, rgba(17, 17, 17, 0.95) 100%);
+            border: 2px solid var(--primary-cyan);
+            border-radius: 15px;
+            padding: 50px;
+            width: 90%;
+            max-width: 600px;
+            position: relative;
+            box-shadow: 0 0 50px rgba(0, 255, 255, 0.3);
+        }
+
+        .close {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            color: var(--primary-cyan);
+            font-size: 2.5rem;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .close:hover {
+            color: var(--accent-pink);
+        }
+
+        .modal-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.2rem;
+            color: var(--primary-cyan);
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 10px;
+            color: var(--primary-cyan);
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            border-radius: 5px;
+            color: var(--text-primary);
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.1rem;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-cyan);
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+        }
+
+        /* Netlify Form Indicator */
+        .netlify-indicator {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 20px;
+            color: var(--text-secondary);
+            justify-content: center;
+        }
+
+        .netlify-logo {
+            width: 24px;
+            height: 24px;
+            background: url('https://www.netlify.com/img/global/badges/netlify-dark.svg') center/contain no-repeat;
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+            
+            .hero p {
+                font-size: 1.3rem;
+            }
+            
+            .section-title {
+                font-size: 2.3rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                gap: 25px;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .hero {
+                padding: 70px 0 50px;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .section {
+                padding: 70px 0;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .booking-section {
+                padding: 50px 20px;
+            }
+            
+            .modal-content {
+                padding: 40px 25px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .btn {
+                padding: 14px 30px;
+                font-size: 1rem;
+                width: 100%;
+            }
+            
+            .hero-buttons {
+                gap: 15px;
+            }
+            
+            .project-links {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">SOLO AUTOMATION</div>
+            <nav>
+                <ul>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#testimonials">Clients</a></li>
+                    <li><a href="#booking">Book a Call</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <section class="hero">
+            <h1>DIGITAL SOLUTIONS FOR THE FUTURE</h1>
+            <p>Full-stack development and Python automation services to transform your business processes and digital presence</p>
+            <div class="hero-buttons">
+                <a href="#projects" class="btn">View Projects</a>
+                <a href="#booking" class="btn btn-outline">Book a Consultation</a>
+            </div>
+        </section>
+
+        <section id="services" class="section">
+            <h2 class="section-title">OUR SERVICES</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-code"></i></div>
+                    <h3>Frontend Development</h3>
+                    <p>Modern, responsive user interfaces with React, Vue.js, and CSS frameworks</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-server"></i></div>
+                    <h3>Backend Development</h3>
+                    <p>Scalable server architecture with Node.js, Django, and database solutions</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-robot"></i></div>
+                    <h3>Python Automation</h3>
+                    <p>Custom scripts and bots to automate repetitive tasks and workflows</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="section">
+            <h2 class="section-title">PROJECT SHOWCASE</h2>
+            
+            <div class="projects-tabs">
+                <button class="tab-btn active" data-filter="all">All Projects</button>
+                <button class="tab-btn" data-filter="web">Web Applications</button>
+                <button class="tab-btn" data-filter="automation">Automation</button>
+                <button class="tab-btn" data-filter="data">Data Solutions</button>
+            </div>
+            
+            <div class="projects-grid">
+                <div class="project-card" data-category="web">
+                    <div class="project-image" style="background: linear-gradient(45deg, #8b00ff, #ff0080);">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">E-Commerce Dashboard</h3>
+                        <p class="project-description">Advanced inventory management and sales analytics platform with real-time reporting.</p>
+                        <div class="project-links">
+                            <a href="https://github.com/yourusername/ecommerce-dashboard" class="project-link" target="_blank">
+                                <i class="fab fa-github"></i> GitHub
+                            </a>
+                            <a href="#" class="project-link">
+                                <i class="fas fa-external-link-alt"></i> Live Demo
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-card" data-category="automation">
+                    <div class="project-image" style="background: linear-gradient(45deg, #00ffff, #8b00ff);">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Data Pipeline Automation</h3>
+                        <p class="project-description">Automated data collection and processing system handling 10,000+ records daily.</p>
+                        <div class="project-links">
+                            <a href="https://github.com/yourusername/data-pipeline" class="project-link" target="_blank">
+                                <i class="fab fa-github"></i> GitHub
+                            </a>
+                            <a href="#" class="project-link">
+                                <i class="fas fa-file-alt"></i> Case Study
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-card" data-category="data">
+                    <div class="project-image" style="background: linear-gradient(45deg, #ff0080, #00ffff);">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Financial Analytics Platform</h3>
+                        <p class="project-description">Comprehensive financial management application with real-time market data integration.</p>
+                        <div class="project-links">
+                            <a href="https://github.com/yourusername/financial-platform" class="project-link" target="_blank">
+                                <i class="fab fa-github"></i> GitHub
+                            </a>
+                            <a href="#" class="project-link">
+                                <i class="fas fa-external-link-alt"></i> Demo
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="testimonials" class="section">
+            <h2 class="section-title">CLIENT TESTIMONIALS</h2>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <p class="testimonial-content">"Solo Automation transformed our manual reporting process into a fully automated system, saving us over 20 hours per week. The solution was delivered on time and exceeded our expectations."</p>
+                    <div class="client-info">
+                        <div class="client-avatar">JD</div>
+                        <div class="client-details">
+                            <h4>John Davis</h4>
+                            <p>CTO, TechInnovate Inc.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <p class="testimonial-content">"The e-commerce dashboard developed by Solo Automation gave us real-time insights into our sales data. Our conversion rates increased by 35% within the first month of implementation."</p>
+                    <div class="client-info">
+                        <div class="client-avatar">SR</div>
+                        <div class="client-details">
+                            <h4>Sarah Rodriguez</h4>
+                            <p>CEO, Global Retail Solutions</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <p class="testimonial-content">"Working with Solo Automation was a game-changer for our data processing needs. Their Python automation scripts reduced errors by 90% and increased our processing speed by 5x."</p>
+                    <div class="client-info">
+                        <div class="client-avatar">MK</div>
+                        <div class="client-details">
+                            <h4>Michael Kim</h4>
+                            <p>Data Director, FinTech Analytics</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="booking" class="booking-section">
+            <div class="booking-container">
+                <h2 class="section-title">BOOK A CONSULTATION</h2>
+                <p>Schedule a paid call to discuss your project requirements and get expert advice</p>
+                
+                <div class="booking-options">
+                    <div class="booking-card">
+                        <h3>Discovery Call</h3>
+                        <div class="booking-price">$15</div>
+                        <ul class="booking-features">
+                            <li>30 minute consultation</li>
+                            <li>Project analysis</li>
+                            <li>Solution roadmap</li>
+                            <li>Q&A session</li>
+                        </ul>
+                        <button class="btn" onclick="openBookingModal('discovery')">Book Now</button>
+                    </div>
+                    
+                    <div class="booking-card">
+                        <h3>Project Planning</h3>
+                        <div class="booking-price">$50</div>
+                        <ul class="booking-features">
+                            <li>60 minute session</li>
+                            <li>Technical blueprint</li>
+                            <li>Timeline & milestones</li>
+                            <li>Cost estimation</li>
+                        </ul>
+                        <button class="btn" onclick="openBookingModal('planning')">Book Now</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer id="contact">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>Solo Automation</h3>
+                    <p>Full-stack development and Python automation solutions for businesses of all sizes.</p>
+                    <div class="social-links">
+                        <a href="https://github.com/yourusername" class="social-link" target="_blank">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="https://linkedin.com/in/yourprofile" class="social-link" target="_blank">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="https://twitter.com/yourhandle" class="social-link" target="_blank">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Services</h3>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Frontend Development</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Backend Development</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Python Automation</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Full Stack Solutions</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Contact</h3>
+                    <ul class="footer-links">
+                        <li><a href="mailto:soloautomations@proton.me"><i class="fas fa-envelope"></i> soloautomations@proton.me</a></li>
+                        <li><a href="tel:+15615273900"><i class="fas fa-phone"></i> +1 (561) 527-3900</a></li>
+                        <li><a href="#"><i class="fas fa-map-marker-alt"></i> Florida, USA</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                &copy; 2023 Solo Automation. All rights reserved.
+                <div class="netlify-indicator">
+                    <div class="netlify-logo"></div>
+                    <span>Powered by Netlify</span>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Booking Modal with Netlify Form -->
+    <div class="modal" id="bookingModal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2 class="modal-title" id="modalTitle">Book a Discovery Call</h2>
+            
+            <!-- Netlify Form Configuration -->
+            <form name="booking" method="POST" data-netlify="true" id="bookingForm">
+                <input type="hidden" name="form-name" value="booking">
+                <input type="hidden" name="booking-type" id="bookingType" value="discovery">
+                
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="date">Preferred Date</label>
+                    <input type="date" id="date" name="date" required>
+                </div>
+                <div class="form-group">
+                    <label for="time">Preferred Time</label>
+                    <select id="time" name="time" required>
+                        <option value="">Select a time</option>
+                        <option value="9:00">9:00 AM</option>
+                        <option value="10:00">10:00 AM</option>
+                        <option value="11:00">11:00 AM</option>
+                        <option value="13:00">1:00 PM</option>
+                        <option value="14:00">2:00 PM</option>
+                        <option value="15:00">3:00 PM</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="notes">Project Details</label>
+                    <textarea id="notes" name="notes" rows="4"></textarea>
+                </div>
+                <button type="submit" class="btn">Pay & Schedule Call</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Tab functionality for projects
+        document.querySelectorAll('.tab-btn').forEach(button => {
+            button.addEventListener('click', () => {
+                // Update active tab
+                document.querySelectorAll('.tab-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                button.classList.add('active');
+                
+                // Filter projects
+                const filter = button.getAttribute('data-filter');
+                const projects = document.querySelectorAll('.project-card');
+                
+                projects.forEach(project => {
+                    if (filter === 'all' || project.getAttribute('data-category') === filter) {
+                        project.style.display = 'block';
+                    } else {
+                        project.style.display = 'none';
+                    }
+                });
+            });
+        });
+        
+        // Modal functionality
+        function openBookingModal(type) {
+            const modal = document.getElementById('bookingModal');
+            const title = document.getElementById('modalTitle');
+            const bookingType = document.getElementById('bookingType');
+            
+            if (type === 'discovery') {
+                title.textContent = 'Book a Discovery Call ($15)';
+                bookingType.value = 'discovery';
+            } else {
+                title.textContent = 'Book a Project Planning Session ($50)';
+                bookingType.value = 'planning';
+            }
+            
+            modal.style.display = 'flex';
+        }
+        
+        function closeModal() {
+            document.getElementById('bookingModal').style.display = 'none';
+        }
+        
+        // Close modal when clicking outside
+        window.addEventListener('click', (e) => {
+            const modal = document.getElementById('bookingModal');
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+        
+        // Netlify form handling
+        document.getElementById('bookingForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form values
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const date = document.getElementById('date').value;
+            const time = document.getElementById('time').value;
+            const bookingType = document.getElementById('bookingType').value;
+            
+            // In a real implementation, this would process payment and schedule the call
+            // For this demo, we'll show a confirmation
+            alert(`Thank you ${name}! Your ${bookingType} has been scheduled for ${date} at ${time}. A confirmation has been sent to ${email}.`);
+            
+            // Reset form and close modal
+            document.getElementById('bookingForm').reset();
+            closeModal();
+        });
+        
+        // Set minimum date to today
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById('date').min = today;
+    </script>
+</body>
+</html>
