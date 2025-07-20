@@ -6,7 +6,6 @@
     <title>Solo Automation - Digital Solutions</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Base styles */
         :root {
             --primary-cyan: #00ffff;
             --primary-purple: #8b00ff;
@@ -677,73 +676,108 @@
             opacity: 1;
         }
 
-        /* Gallery section */
-        .gallery-section {
+        /* Marketing Section */
+        .marketing-section {
             margin: 80px 0;
+            padding: 40px;
+            background: linear-gradient(135deg, rgba(0, 255, 255, 0.1), rgba(139, 0, 255, 0.1));
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            border-radius: 10px;
         }
 
-        .gallery-grid {
+        .marketing-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
             margin-top: 40px;
         }
 
-        .gallery-item {
-            height: 250px;
-            overflow: hidden;
-            position: relative;
+        .marketing-card {
+            background: linear-gradient(135deg, var(--card-bg) 0%, rgba(17, 17, 17, 0.8) 100%);
             border: 1px solid rgba(0, 255, 255, 0.2);
-            transition: all 0.4s ease;
+            padding: 30px;
+            text-align: center;
+            position: relative;
+            transition: all 0.3s ease;
         }
 
-        .gallery-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
+        .marketing-icon {
+            font-size: 3rem;
+            color: var(--primary-cyan);
+            margin-bottom: 20px;
         }
 
-        .gallery-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(to top, rgba(10, 10, 10, 0.9), transparent);
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-            padding: 20px;
-            opacity: 0;
-            transition: opacity 0.4s ease;
+        .marketing-card h3 {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            color: var(--text-primary);
         }
 
-        .gallery-item:hover {
-            border-color: var(--primary-cyan);
+        .marketing-card p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .marketing-card:hover {
+            transform: translateY(-10px);
             box-shadow: 0 10px 30px rgba(0, 255, 255, 0.2);
         }
 
-        .gallery-item:hover img {
-            transform: scale(1.1);
+        /* Testimonials */
+        .testimonials-section {
+            margin: 80px 0;
         }
 
-        .gallery-item:hover .gallery-overlay {
-            opacity: 1;
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
         }
 
-        .gallery-title {
-            font-family: 'Orbitron', monospace;
-            font-size: 1.1rem;
-            color: var(--primary-cyan);
-            margin-bottom: 8px;
-            text-transform: uppercase;
+        .testimonial-card {
+            background: linear-gradient(135deg, var(--card-bg) 0%, rgba(17, 17, 17, 0.8) 100%);
+            border: 1px solid rgba(0, 255, 255, 0.2);
+            padding: 30px;
+            position: relative;
+            transition: all 0.3s ease;
         }
 
-        .gallery-category {
-            font-size: 0.9rem;
+        .testimonial-text {
+            font-style: italic;
+            line-height: 1.6;
+            margin-bottom: 20px;
             color: var(--text-secondary);
-            font-weight: 300;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--primary-cyan), var(--primary-purple));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .author-info h4 {
+            font-family: 'Orbitron', monospace;
+            color: var(--primary-cyan);
+            margin-bottom: 5px;
+        }
+
+        .author-info p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
         }
 
         /* CTA section */
@@ -781,6 +815,17 @@
             margin-bottom: 20px;
             text-transform: uppercase;
             letter-spacing: 0.1em;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
             position: relative;
             z-index: 1;
         }
@@ -924,7 +969,8 @@
             .process-grid,
             .stats-grid,
             .clients-grid,
-            .gallery-grid {
+            .marketing-grid,
+            .testimonial-grid {
                 grid-template-columns: 1fr;
             }
             
@@ -947,10 +993,6 @@
             
             .project-image {
                 height: 180px;
-            }
-            
-            .gallery-item {
-                height: 220px;
             }
         }
     </style>
@@ -1036,6 +1078,35 @@
             </div>
         </div>
 
+        <!-- Marketing Section -->
+        <div class="marketing-section">
+            <h2 class="section-title">HOW I CAN HELP YOUR BUSINESS</h2>
+            <div class="marketing-grid">
+                <div class="marketing-card">
+                    <div class="marketing-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Boost Efficiency</h3>
+                    <p>Automate repetitive tasks to save your team 10-20 hours per week. Focus on high-value work while I handle the routine.</p>
+                </div>
+                <div class="marketing-card">
+                    <div class="marketing-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h3>Process Automation</h3>
+                    <p>Transform manual workflows into automated systems that work 24/7 without errors or delays.</p>
+                </div>
+                <div class="marketing-card">
+                    <div class="marketing-icon">
+                        <i class="fas fa-sync-alt"></i>
+                    </div>
+                    <h3>Data Integration</h3>
+                    <p>Connect your disparate systems and create seamless data flows between applications.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Projects Section -->
         <div class="projects-section">
             <h2 class="section-title">RECENT PROJECTS</h2>
             
@@ -1085,85 +1156,47 @@
                         <a href="#" class="project-link">DOCUMENTATION</a>
                     </div>
                 </div>
-
-                <div class="project-card">
-                    <div class="project-header">
-                        <div class="project-icon">🤖</div>
-                        <div class="project-title">AI AUTOMATION BOT</div>
-                    </div>
-                    <div class="project-image">
-                        <img src="https://images.unsplash.com/photo-1677442135722-5f8ea49cec8a?q=80&w=600" alt="AI Automation Bot">
-                    </div>
-                    <div class="project-description">
-                        Intelligent social media automation system with natural language processing, scheduled content management, and engagement analytics across multiple platforms.
-                    </div>
-                    <div class="tech-stack">
-                        <span class="tech-badge">PYTHON</span>
-                        <span class="tech-badge">NLP</span>
-                        <span class="tech-badge">APIS</span>
-                        <span class="tech-badge">SELENIUM</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="#" class="project-link">DEMO</a>
-                        <a href="#" class="project-link">FEATURES</a>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <div class="project-header">
-                        <div class="project-icon">💰</div>
-                        <div class="project-title">FINTECH PLATFORM</div>
-                    </div>
-                    <div class="project-image">
-                        <img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?q=80&w=600" alt="Fintech Platform">
-                    </div>
-                    <div class="project-description">
-                        Comprehensive financial management application with portfolio tracking, expense analysis, and real-time market data integration. Features advanced security and compliance.
-                    </div>
-                    <div class="tech-stack">
-                        <span class="tech-badge">VUE.JS</span>
-                        <span class="tech-badge">EXPRESS</span>
-                        <span class="tech-badge">MYSQL</span>
-                        <span class="tech-badge">CHART.JS</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="#" class="project-link">LIVE APP</a>
-                        <a href="#" class="project-link">SECURITY</a>
-                    </div>
-                </div>
             </div>
         </div>
 
-        <!-- Gallery Section -->
-        <div class="gallery-section">
-            <h2 class="section-title">PROJECT GALLERY</h2>
-            <div class="gallery-grid">
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=600" alt="Code Interface">
-                    <div class="gallery-overlay">
-                        <div class="gallery-title">DEVELOPER DASHBOARD</div>
-                        <div class="gallery-category">Full-Stack Development</div>
+        <!-- Testimonials Section -->
+        <div class="testimonials-section">
+            <h2 class="section-title">CLIENT TESTIMONIALS</h2>
+            <div class="testimonial-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        "Solo Automation transformed our manual reporting process into a fully automated system that saves us 15 hours per week. The dashboard they created gives us real-time insights we never had before."
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">MJ</div>
+                        <div class="author-info">
+                            <h4>Michael Johnson</h4>
+                            <p>CTO, TechSolutions Inc.</p>
+                        </div>
                     </div>
                 </div>
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1558346490-a72e53ae2d4f?q=80&w=600" alt="Data Visualization">
-                    <div class="gallery-overlay">
-                        <div class="gallery-title">ANALYTICS DASHBOARD</div>
-                        <div class="gallery-category">Data Visualization</div>
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        "The e-commerce automation system they built reduced our order processing time by 75% and eliminated errors. Their attention to detail and technical expertise is outstanding."
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">SR</div>
+                        <div class="author-info">
+                            <h4>Sarah Reynolds</h4>
+                            <p>Operations Director, ShopSmart</p>
+                        </div>
                     </div>
                 </div>
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1593508512255-86ab42a8e620?q=80&w=600" alt="Automation Interface">
-                    <div class="gallery-overlay">
-                        <div class="gallery-title">WORKFLOW AUTOMATION</div>
-                        <div class="gallery-category">Process Automation</div>
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        "Working with Solo Automation was a game-changer for our business. They automated our entire customer onboarding process, improving customer satisfaction while reducing manual work."
                     </div>
-                </div>
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=600" alt="API Architecture">
-                    <div class="gallery-overlay">
-                        <div class="gallery-title">API INTEGRATION</div>
-                        <div class="gallery-category">Backend Development</div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">DP</div>
+                        <div class="author-info">
+                            <h4>David Peterson</h4>
+                            <p>CEO, FinTech Global</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1192,19 +1225,6 @@
                     <span class="process-number">4</span>
                     <h3>Deployment</h3>
                     <p>Seamless launch with documentation and 30-day maintenance support.</p>
-                </div>
-            </div>
-            
-            <!-- Contact options in process section -->
-            <div class="process-contact">
-                <h3>Ready to Start Your Project?</h3>
-                <div class="contact-buttons">
-                    <a href="mailto:soloautomations@proton.me?subject=Project%20Inquiry" class="contact-btn">
-                        <i class="fas fa-envelope"></i> SEND EMAIL
-                    </a>
-                    <a href="tel:+15615273900" class="contact-btn call-btn">
-                        <i class="fas fa-phone"></i> PLACE A CALL
-                    </a>
                 </div>
             </div>
         </div>
@@ -1258,15 +1278,16 @@
         </div>
 
         <div class="cta-section">
-            <h2 class="cta-title">READY TO AUTOMATE?</h2>
+            <h2 class="cta-title">READY TO AUTOMATE YOUR BUSINESS?</h2>
+            <p class="cta-subtitle">Get a free automation audit and discover how much time and money we can save your business. No obligation, just actionable insights.</p>
             <div class="dropdown-container">
-                <button class="cta-btn">START PROJECT</button>
+                <button class="cta-btn">START YOUR PROJECT</button>
                 <div class="dropdown-content">
-                    <a href="mailto:soloautomations@proton.me?subject=Project%20Inquiry" id="emailBtn">
-                        <i class="fas fa-envelope"></i> SEND EMAIL
+                    <a href="mailto:soloautomations@proton.me?subject=Free%20Automation%20Audit" id="emailBtn">
+                        <i class="fas fa-envelope"></i> GET FREE AUDIT
                     </a>
                     <a href="tel:+15615273900" id="callBtn">
-                        <i class="fas fa-phone"></i> PLACE A CALL
+                        <i class="fas fa-phone"></i> SCHEDULE CALL
                     </a>
                 </div>
             </div>
@@ -1307,7 +1328,7 @@
             }, 3000);
 
             // Floating animation for cards
-            const cards = document.querySelectorAll('.cyber-card, .project-card, .process-card, .stat-card');
+            const cards = document.querySelectorAll('.cyber-card, .project-card, .process-card, .stat-card, .marketing-card, .testimonial-card');
             cards.forEach((card, index) => {
                 setInterval(() => {
                     const offset = Math.sin(Date.now() * 0.001 + index) * 3;
@@ -1319,27 +1340,6 @@
             const themeToggle = document.getElementById('themeToggle');
             themeToggle.addEventListener('change', () => {
                 document.body.classList.toggle('light-theme');
-            });
-            
-            // Gallery hover effect
-            const galleryItems = document.querySelectorAll('.gallery-item');
-            galleryItems.forEach(item => {
-                item.addEventListener('mousemove', (e) => {
-                    const rect = item.getBoundingClientRect();
-                    const x = e.clientX - rect.left;
-                    const y = e.clientY - rect.top;
-                    const centerX = rect.width / 2;
-                    const centerY = rect.height / 2;
-                    
-                    const rotateY = (x - centerX) / 20;
-                    const rotateX = (centerY - y) / 20;
-                    
-                    item.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-                });
-                
-                item.addEventListener('mouseleave', () => {
-                    item.style.transform = 'perspective(1000px) rotateX(0) rotateY(0)';
-                });
             });
         });
     </script>
