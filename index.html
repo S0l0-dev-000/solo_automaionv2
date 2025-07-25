@@ -17,6 +17,7 @@
             --text-secondary: #b0b0b0;
             --border-glow: rgba(0, 255, 255, 0.3);
             --shadow-glow: rgba(0, 255, 255, 0.2);
+            --glow-intensity: 1;
         }
 
         /* Light theme variables */
@@ -28,6 +29,7 @@
             --text-secondary: #555555;
             --border-glow: rgba(0, 150, 200, 0.3);
             --shadow-glow: rgba(0, 150, 200, 0.2);
+            --glow-intensity: 0.7;
         }
 
         * {
@@ -42,9 +44,9 @@
             color: var(--text-primary);
             min-height: 100vh;
             background-image: 
-                radial-gradient(circle at 20% 50%, rgba(139, 0, 255, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(0, 255, 255, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 40% 80%, rgba(255, 0, 128, 0.1) 0%, transparent 50%);
+                radial-gradient(circle at 20% 50%, rgba(139, 0, 255, calc(0.1 * var(--glow-intensity))) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(0, 255, 255, calc(0.1 * var(--glow-intensity))) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, rgba(255, 0, 128, calc(0.1 * var(--glow-intensity))) 0%, transparent 50%);
             position: relative;
             overflow-x: hidden;
             transition: background 0.5s ease, color 0.5s ease;
@@ -63,6 +65,7 @@
             text-align: center;
             margin-bottom: 60px;
             position: relative;
+            padding-top: 60px;
         }
 
         .theme-toggle {
@@ -72,6 +75,11 @@
             display: flex;
             align-items: center;
             gap: 10px;
+            background: rgba(17, 17, 17, 0.7);
+            padding: 8px 15px;
+            border-radius: 30px;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(0, 255, 255, 0.2);
         }
 
         .switch {
@@ -129,9 +137,9 @@
             position: relative;
             display: inline-block;
             text-shadow: 
-                0 0 10px var(--primary-cyan),
-                0 0 20px var(--primary-cyan),
-                0 0 40px var(--primary-cyan);
+                0 0 calc(10px * var(--glow-intensity)) var(--primary-cyan),
+                0 0 calc(20px * var(--glow-intensity)) var(--primary-cyan),
+                0 0 calc(40px * var(--glow-intensity)) var(--primary-cyan);
             animation: flicker 3s infinite;
         }
 
@@ -159,11 +167,12 @@
             z-index: 1000;
             border-bottom: 1px solid rgba(0, 255, 255, 0.2);
             padding: 15px 0;
+            display: flex;
+            justify-content: center;
         }
         
         .nav-menu {
             display: flex;
-            justify-content: center;
             list-style: none;
             gap: 30px;
         }
@@ -1083,6 +1092,18 @@
             margin-top: 20px;
         }
 
+        /* Matrix effect */
+        .matrix-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.05;
+            pointer-events: none;
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             .glitch {
@@ -1128,6 +1149,9 @@
     </style>
 </head>
 <body>
+    <!-- Matrix Background Effect -->
+    <canvas class="matrix-bg" id="matrixCanvas"></canvas>
+
     <!-- Navigation -->
     <div class="nav-container">
         <ul class="nav-menu">
@@ -1153,13 +1177,13 @@
             <p class="tagline">// DIGITAL SOLUTIONS FOR THE FUTURE //</p>
         </div>
 
-        <div class="card-grid">
+        <div class="card-grid" id="services">
             <div class="cyber-card">
                 <div class="card-header">
                     <div class="card-icon">⚡</div>
                     <div>
                         <div class="card-title">SERVICES</div>
-                        <div class="card-subtitle">Full-Stack Development</div>
+                        <div class="card-subtitle">Full-Stack Development & Automation</div>
                     </div>
                 </div>
                 <div class="services-grid">
@@ -1202,15 +1226,15 @@
                 <form class="contact-form" id="contactForm">
                     <div class="form-group">
                         <label class="form-label" for="name">Name</label>
-                        <input type="text" id="name" class="form-input" required>
+                        <input type="text" id="name" class="form-input" required placeholder="Your name">
                     </div>
                     <div class="form-group">
                         <label class="form-label" for="email">Email</label>
-                        <input type="email" id="email" class="form-input" required>
+                        <input type="email" id="email" class="form-input" required placeholder="your@email.com">
                     </div>
                     <div class="form-group">
                         <label class="form-label" for="message">Message</label>
-                        <textarea id="message" class="form-input" required></textarea>
+                        <textarea id="message" class="form-input" required placeholder="How can I help you?"></textarea>
                     </div>
                     <button type="submit" class="submit-btn">SEND MESSAGE</button>
                 </form>
@@ -1260,8 +1284,9 @@
                         <div class="project-title">E-COMMERCE DASHBOARD</div>
                     </div>
                     <div class="project-image">
-                        <div style="background: linear-gradient(135deg, #2a0a4a, #0a0a3a); width:100%; height:100%; display:flex; align-items:center; justify-content:center;">
-                            <div style="color: #00ffff; font-family: 'Orbitron'; font-size: 1.5rem; text-align: center; padding: 20px;">
+                        <div style="background: linear-gradient(135deg, #2a0a4a, #0a0a3a); width:100%; height:100%; display:flex; align-items:center; justify-content:center; position:relative;">
+                            <div class="cyber-grid-overlay"></div>
+                            <div style="color: #00ffff; font-family: 'Orbitron'; font-size: 1.5rem; text-align: center; padding: 20px; z-index:2;">
                                 <i class="fas fa-shopping-cart" style="font-size: 3rem; margin-bottom: 15px;"></i>
                                 <p>E-commerce Automation Dashboard</p>
                             </div>
@@ -1288,8 +1313,9 @@
                         <div class="project-title">DATA PIPELINE</div>
                     </div>
                     <div class="project-image">
-                        <div style="background: linear-gradient(135deg, #0a3a4a, #0a0a3a); width:100%; height:100%; display:flex; align-items:center; justify-content:center;">
-                            <div style="color: #00ffff; font-family: 'Orbitron'; font-size: 1.5rem; text-align: center; padding: 20px;">
+                        <div style="background: linear-gradient(135deg, #0a3a4a, #0a0a3a); width:100%; height:100%; display:flex; align-items:center; justify-content:center; position:relative;">
+                            <div class="cyber-grid-overlay"></div>
+                            <div style="color: #00ffff; font-family: 'Orbitron'; font-size: 1.5rem; text-align: center; padding: 20px; z-index:2;">
                                 <i class="fas fa-stream" style="font-size: 3rem; margin-bottom: 15px;"></i>
                                 <p>Data Integration Pipeline</p>
                             </div>
@@ -1458,6 +1484,92 @@
     </div>
 
     <script>
+        // Matrix background effect
+        const canvas = document.getElementById('matrixCanvas');
+        const ctx = canvas.getContext('2d');
+        
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        
+        const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789$#@%&*';
+        const fontSize = 14;
+        const columns = canvas.width / fontSize;
+        
+        const drops = [];
+        for (let i = 0; i < columns; i++) {
+            drops[i] = Math.floor(Math.random() * canvas.height / fontSize);
+        }
+        
+        function drawMatrix() {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            ctx.fillStyle = '#0f0';
+            ctx.font = `${fontSize}px monospace`;
+            
+            for (let i = 0; i < drops.length; i++) {
+                const text = characters.charAt(Math.floor(Math.random() * characters.length));
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+                
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+                
+                drops[i]++;
+            }
+        }
+        
+        setInterval(drawMatrix, 33);
+        
+        // Theme toggle functionality
+        const themeToggle = document.getElementById('themeToggle');
+        themeToggle.addEventListener('change', () => {
+            document.body.setAttribute('data-theme', 
+                themeToggle.checked ? 'light' : 'dark');
+            localStorage.setItem('theme', themeToggle.checked ? 'light' : 'dark');
+        });
+        
+        // Load saved theme preference
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            document.body.setAttribute('data-theme', savedTheme);
+            themeToggle.checked = savedTheme === 'light';
+        }
+
+        // Form submission
+        const contactForm = document.getElementById('contactForm');
+        if (contactForm) {
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Get form values
+                const name = document.getElementById('name').value;
+                const email = document.getElementById('email').value;
+                const message = document.getElementById('message').value;
+                
+                // Show success message
+                alert(`Thank you, ${name}! Your message has been sent. I'll get back to you soon.`);
+                
+                // Reset form
+                contactForm.reset();
+            });
+        }
+        
+        // Smooth scrolling for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    window.scrollTo({
+                        top: target.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
         // Cyberpunk animations and effects
         document.addEventListener('DOMContentLoaded', function() {
             // Glitch effect for title
@@ -1488,55 +1600,12 @@
                     card.style.transform = `translateY(${offset}px)`;
                 }, 50);
             });
+        });
 
-            // Theme toggle functionality
-            const themeToggle = document.getElementById('themeToggle');
-            themeToggle.addEventListener('change', () => {
-                document.body.setAttribute('data-theme', 
-                    themeToggle.checked ? 'light' : 'dark');
-                localStorage.setItem('theme', themeToggle.checked ? 'light' : 'dark');
-            });
-            
-            // Load saved theme preference
-            const savedTheme = localStorage.getItem('theme');
-            if (savedTheme) {
-                document.body.setAttribute('data-theme', savedTheme);
-                themeToggle.checked = savedTheme === 'light';
-            }
-
-            // Form submission
-            const contactForm = document.getElementById('contactForm');
-            if (contactForm) {
-                contactForm.addEventListener('submit', function(e) {
-                    e.preventDefault();
-                    
-                    // Get form values
-                    const name = document.getElementById('name').value;
-                    const email = document.getElementById('email').value;
-                    const message = document.getElementById('message').value;
-                    
-                    // Show success message
-                    alert(`Thank you, ${name}! Your message has been sent. I'll get back to you soon.`);
-                    
-                    // Reset form
-                    contactForm.reset();
-                });
-            }
-            
-            // Smooth scrolling for navigation
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    
-                    const target = document.querySelector(this.getAttribute('href'));
-                    if (target) {
-                        window.scrollTo({
-                            top: target.offsetTop - 80,
-                            behavior: 'smooth'
-                        });
-                    }
-                });
-            });
+        // Resize canvas when window is resized
+        window.addEventListener('resize', function() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
         });
     </script>
 </body>
